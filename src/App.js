@@ -1,4 +1,4 @@
-import ChatBot from './ChatBot';
+import ChatBot from './pages/components/ChatBot';
 import CoffeeBean from "./pages/CoffeeBean";
 import FormCreation from "./pages/FormCreation";
 import CoffeBeenList from './pages/CoffeBeenList';
