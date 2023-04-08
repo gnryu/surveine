@@ -1,0 +1,20 @@
+.navbar{
+    width: 100%;
+    padding: 15px 0px;
+    background-color: white;
+    text-align: center;
+}
+
+.navbarMenu{
+    color: #111536;
+    margin: 10px;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar .img{
+    float: right;
+}
+
+
