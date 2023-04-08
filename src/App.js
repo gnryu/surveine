@@ -1,6 +1,7 @@
 import ChatBot from './ChatBot';
 import CoffeeBean from "./pages/CoffeeBean";
 import FormCreation from "./pages/FormCreation";
+import CoffeBeenList from './pages/CoffeBeenList';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <ChatBot/>
       <CoffeeBean/>
       <FormCreation/>
+      <CoffeBeenList/>
     </>
   );
 }
