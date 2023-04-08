@@ -5,18 +5,19 @@ import {FiSettings} from 'react-icons/fi';
 import {CgProfile} from 'react-icons/cg';
 
 function SideNavi(){
-    
+
 return(
+  <div className="container">
+     <div className="navbar">
       <div>
       <img src= "/img/logo.svg"  alt="logo"/>
+      </div>
       <div>
-     <div>
-      <button><FiSettings/></button>
-     </div>
-     <div className="Profile">
-      <CgProfile/>
-      <Navbar bg="dark" variant="dark">
-    <Container>
+        <FiSettings classnName="icon" color="grey" />
+      </div>
+      <img src="/img/profile.svg" alt="profile"/>
+      <div className="name"> Kaffeine</div>
+      <hr/>
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link href="/gps설문함">GPS 설문함</Nav.Link>
@@ -34,13 +35,9 @@ return(
           </NavDropdown>
         </Nav>  
       </Navbar.Collapse>
-    </Container>
-  </Navbar>
-  </div>
-  </div>
-  </div>
+      </div>
+      </div>
   );
 }
-
 
 export default SideNavi;

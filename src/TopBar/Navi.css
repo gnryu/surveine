@@ -1,8 +1,9 @@
 .navbar{
     width: 100%;
     padding: 15px 0px;
-    background-color: #111536;
-    text-align: center;
+    background-color: hsl(234, 52%, 14%);
+    display: flex;
+   
 }
 
 .navbarMenu{
@@ -13,8 +14,7 @@
     font-weight: bold;
 }
 
-.navbar .img{
-    float: right;
+.buttons{
+    display:flex;
 }
-
 

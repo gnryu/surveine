@@ -1,20 +1,43 @@
-.Navbar{
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-}
-
-.Navbar .me-auto{
-    font-weight: bold;
-    font-size: large;
-    text-decoration-line: none;
-}
-
-.Navbar .button{
-     float: right;
-}
-
-.Navbar .Profile{
+.container {
     display: flex;
+    flex-direction: row;
+  }
+  
+.navbar{
+flex-direction: column;
+align-items: center;
+width: 250px;
+height: 100vh;
+background-color: #111536;
 }
+
+.top-nav {
+    display: flex;
+    flex: 1;
+    background-color: #e93636;
+  }
+
+.navbar hr{
+    color:white;
+    size: 3px;
+    width: 100%;
+    
+}
+
+.profile {
+  
+  }
+
+.name{
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+    color:white;
+}
+.icon{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
