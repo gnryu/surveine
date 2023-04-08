@@ -51,13 +51,10 @@ const QuesTitle = styled.input`
   margin: 1rem 1rem;
 `;
 
-const TypeSelect = styled.div`
-  display: inline-block;
-`;
 function FormQuestion(props) {
   const [title, setTitle] = useState();
   const [id, setId] = useState(0);
-  const [type, setType] = useState("체크박스");
+
   let [count, setCount] = useState(0);
   const [qstBox, newQstBox] = useState([
     {
@@ -107,19 +104,10 @@ function FormQuestion(props) {
     });
   };
 
-  //타입 설렉트
-  const selectType = (e) => {
-    setType(e.target.value);
-  };
-
   //타입 바뀌면 rerender
-  useEffect(() => {
-    console.log(type);
-  }, [type]);
 
   const IdChange = (currentId) => {
     setId(currentId);
-    SaveToArray();
   };
 
   const SaveToArray = (e) => {
@@ -129,6 +117,7 @@ function FormQuestion(props) {
         qstBox[id] = qstInfo;
         count++;
         console.log(JSON.parse(JSON.stringify([...qstBox])));
+        return;
       }
     });
     if (count == 0) {
@@ -160,15 +149,9 @@ function FormQuestion(props) {
                   handleClick({ qstTitle: e.target.value, qstId: item });
                 }}
               />
-              <TypeSelect>
-                <select onChange={selectType}>
-                  <option>체크박스</option>
-                  <option>객관식 질문</option>
-                  <option>서술형 질문</option>
-                </select>
-              </TypeSelect>
+
               <button onClick={SaveToArray}>저장</button>
-              <QstOptions qstType={type} />
+              <QstOptions />
             </MainFrame>
           </>
         ))}

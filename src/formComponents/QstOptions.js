@@ -1,12 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 // import styles from "../css/QstOptions.module.css";
 
 function QstOptions({ qstType }) {
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
-
+  const [type, setType] = useState("체크박스");
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -26,71 +26,89 @@ function QstOptions({ qstType }) {
 
   // const opt = "옵션1"
 
+  //타입 설렉트
+  const selectType = (e) => {
+    setType(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(type);
+  }, [type]);
+
   return (
-    <Wrapper>
-      <div>
-        {qstType == "체크박스" && (
-          <div>
-            <OptList>
-              {options.map((it) => (
-                <div>
-                  <input type="checkbox" value={it} /> <label>{it}</label>
-                </div>
-              ))}
-            </OptList>
-            체크박스 질문입니다.
-            <OptionBox>
-              <br />
-              <br />
-              <input
-                type="text"
-                placeholder="옵션"
-                value={input}
-                name="text"
-                onChange={handleChange}
-              />
-              <Btn>
-                <button onClick={AddOption}>+</button>
-              </Btn>
-            </OptionBox>
-          </div>
-        )}
+    <>
+      <TypeSelect>
+        <select onChange={selectType}>
+          <option>체크박스</option>
+          <option>객관식 질문</option>
+          <option>서술형 질문</option>
+        </select>
+      </TypeSelect>
+      <Wrapper>
+        <div>
+          {type == "체크박스" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="checkbox" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
+              체크박스 질문입니다.
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
 
-        {qstType == "객관식 질문" && (
-          <div>
-            <OptList>
-              {options.map((it) => (
-                <div>
-                  <input type="radio" value={it} /> <label>{it}</label>
-                </div>
-              ))}
-            </OptList>
+          {type == "객관식 질문" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="radio" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
 
-            <OptionBox>
-              <br />
-              <br />
-              <input
-                type="text"
-                placeholder="옵션"
-                value={input}
-                name="text"
-                onChange={handleChange}
-              />
-              <Btn>
-                <button onClick={AddOption}>+</button>
-              </Btn>
-            </OptionBox>
-          </div>
-        )}
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
 
-        {qstType == "서술형 질문" && (
-          <SubjOption>
-            텍스트
-            <hr size="1" width="500px" color="gray" />
-          </SubjOption>
-        )}
-      </div>
-    </Wrapper>
+          {type == "서술형 질문" && (
+            <SubjOption>
+              텍스트
+              <hr size="1" width="500px" color="gray" />
+            </SubjOption>
+          )}
+        </div>
+      </Wrapper>
+    </>
   );
 }
 export default QstOptions;
@@ -131,4 +149,7 @@ const SubjOption = styled.div`
   color: #747474;
   line-height: 1.5;
   margin-left: 15px;
+`;
+const TypeSelect = styled.div`
+  display: inline-block;
 `;
