@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 // import styles from "../css/QstOptions.module.css";
+
 function QstOptions({ qstType }) {
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
@@ -37,9 +38,8 @@ function QstOptions({ qstType }) {
                 </div>
               ))}
             </OptList>
-
+            체크박스 질문입니다.
             <OptionBox>
-              객관식 질문 옵션 중복선택 불가
               <br />
               <br />
               <input
@@ -67,7 +67,6 @@ function QstOptions({ qstType }) {
             </OptList>
 
             <OptionBox>
-              객관식 질문 옵션 중복선택 불가
               <br />
               <br />
               <input
@@ -98,6 +97,7 @@ export default QstOptions;
 
 const Wrapper = styled.div`
   display: inline-block;
+  display: table-row;
 `;
 
 const OptionBox = styled.div`

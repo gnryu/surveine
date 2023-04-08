@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 const FormMain = styled.div`
   background: grey;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
 `;
 const PlusDiv = styled.div`
   display: block;
@@ -29,8 +30,14 @@ const TitleInput = styled.div`
   display: block;
   padding-top: 2em;
 `;
-function QstCreation() {}
 
+const TitleField = styled.input`
+  width: 30em;
+  height: 3em;
+  margin: auto;
+  display: block;
+  text-align: center;
+`;
 function FormCreation() {
   const [title, setTitle] = useState();
   const [type, setType] = useState();
@@ -52,7 +59,7 @@ function FormCreation() {
   return (
     <FormMain>
       <TitleInput>
-        <input
+        <TitleField
           type="text"
           value={title}
           placeholder="설문 제목을 입력하세요"

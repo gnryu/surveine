@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as PlusIcon } from "../img/PlusIcon.svg";
 import QstOptions from "./QstOptions";
@@ -38,8 +38,9 @@ const MainFrame = styled.div`
   border: 1px solid #21296b;
   border-radius: 28px;
   margin-bottom: 3em;
+  display: table;
   &:hover {
-    border: 5px solid #21296b;
+    border: 2px solid #ffa07a;
   }
 `;
 
@@ -56,6 +57,7 @@ const TypeSelect = styled.div`
 function FormQuestion(props) {
   const [title, setTitle] = useState();
   const [id, setId] = useState(0);
+  const [type, setType] = useState("체크박스");
   let [count, setCount] = useState(0);
   const [qstBox, newQstBox] = useState([
     {
@@ -89,6 +91,7 @@ function FormQuestion(props) {
     },
   });
 
+  // 타이틀 업데이트
   const handleClick = (setValue) => {
     let key = Object.keys(setValue)[0];
     let id = Object.keys(setValue)[1];
@@ -104,29 +107,40 @@ function FormQuestion(props) {
     });
   };
 
+  //타입 설렉트
+  const selectType = (e) => {
+    setType(e.target.value);
+  };
+
+  //타입 바뀌면 rerender
+  useEffect(() => {
+    console.log(type);
+  }, [type]);
+
   const IdChange = (currentId) => {
     setId(currentId);
-    console.log(JSON.stringify(id));
+    SaveToArray();
   };
 
   const SaveToArray = (e) => {
-    e.preventDefault();
     let count = 0;
     qstBox.map((data) => {
       if (data.qst.qstId == id) {
         qstBox[id] = qstInfo;
         count++;
+        console.log(JSON.parse(JSON.stringify([...qstBox])));
       }
     });
     if (count == 0) {
       newQstBox([...qstBox, qstInfo]);
+      console.log(JSON.parse(JSON.stringify([...qstBox, qstInfo])));
       if (id == 0) {
         newQstBox([qstInfo]);
+        console.log(JSON.parse(JSON.stringify(qstInfo)));
       }
     }
-    console.log(JSON.parse(JSON.stringify(qstBox)));
-    alert("저장되었습니다!");
   };
+  //
 
   return (
     <>
@@ -144,18 +158,17 @@ function FormQuestion(props) {
                 placeholder="질문 제목을 입력하세요"
                 onChange={(e) => {
                   handleClick({ qstTitle: e.target.value, qstId: item });
-                  console.log(JSON.stringify(qstInfo));
                 }}
               />
               <TypeSelect>
-                <select>
-                  <option id="checkBox">객관식 </option>
-                  <option>주관식 </option>
-                  <option>찬부식 </option>
+                <select onChange={selectType}>
+                  <option>체크박스</option>
+                  <option>객관식 질문</option>
+                  <option>서술형 질문</option>
                 </select>
               </TypeSelect>
               <button onClick={SaveToArray}>저장</button>
-              <QstOptions qstType={"체크박스"} />
+              <QstOptions qstType={type} />
             </MainFrame>
           </>
         ))}
