@@ -29,18 +29,31 @@ const StyledPlusIcon = styled(PlusIcon)`
   margin-top: 3rem;
 `;
 
+const QuestNum = styled.div`
+  width: 5rem;
+  height: 2rem;
+  margin-top: -1rem;
+  margin-left: -0.2rem;
+  border-radius: 0.5rem;
+  background: #1a2051;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+`;
+
 const MainFrame = styled.div`
   display: block;
   margin: auto;
-  width: 50em;
-  height: 10em;
+  width: 50rem;
+  height: 15rem;
   background: #f8f8f8;
   border: 1px solid #21296b;
-  border-radius: 28px;
+  border-radius: 20px;
   margin-bottom: 3em;
   display: table;
   &:hover {
-    border: 2px solid #ffa07a;
+    border: 2px solid #1a2051;
   }
 `;
 
@@ -141,6 +154,7 @@ function FormQuestion(props) {
                 IdChange(item);
               }}
             >
+              <QuestNum>질문</QuestNum>
               <QuesTitle
                 type="text"
                 value={qstInfo.qstTitle}

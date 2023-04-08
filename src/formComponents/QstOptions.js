@@ -55,7 +55,6 @@ function QstOptions({ qstType }) {
                   </div>
                 ))}
               </OptList>
-              체크박스 질문입니다.
               <OptionBox>
                 <br />
                 <br />
