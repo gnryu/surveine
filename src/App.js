@@ -16,6 +16,5 @@ function App() {
     </div>
   );
 }
-//임혜균 깃허브 연결확인
 
 export default App;
