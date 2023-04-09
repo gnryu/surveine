@@ -306,6 +306,40 @@ function FormCreation() {
               </OptionBox>
             </div>
           )}
+
+          {type == "객관식 질문" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="radio" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
+
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
+
+          {type == "서술형 질문" && (
+            <SubjOption>
+              텍스트
+              <hr size="1" width="500px" color="gray" />
+            </SubjOption>
+          )}
         </MainFrame>
 
         {/* <StyledPlusIcon onClick={addTask()} /> */}
