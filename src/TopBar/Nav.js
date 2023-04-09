@@ -7,9 +7,10 @@ import {GrLanguage} from 'react-icons/gr';
 function Nav(){
     return(        
         <div className="navbar"> 
-        
-            <img src= '/img/logo.svg'  alt="logo"/>
+        <div className="icon">
+            <img className="logo" src= '/img/logo.svg'  alt="logo"/>
             {/* 사이트로고 */}
+            </div>
             <div>
             <Link className="navbarMenu" to={'/workspace'}>Work Space</Link>
             <Link className="navbarMenu" to={'/sandbox'}>Sand Box</Link>
