@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 // import styles from "../css/QstOptions.module.css";
 
+const OptInfo = {
+  optId: "",
+  optText: "",
+  optImg: ""
+};
+
 function QstOptions({ qstType }) {
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);

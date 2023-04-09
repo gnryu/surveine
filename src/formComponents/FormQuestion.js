@@ -139,7 +139,7 @@ function FormQuestion(props) {
   return (
     <>
       <MainFrame>
-        <QstTitle>{props.title}</QstTitle>
+        <QstTitle>{props.qstTitle}</QstTitle>
         <QstOptions qstType={props.qstType} />
         {props.options.map((it) => (
           <div>{it}</div>

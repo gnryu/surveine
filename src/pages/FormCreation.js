@@ -4,10 +4,219 @@ import { ReactComponent as PlusIcon } from "../img/PlusIcon.svg";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import QstOptions from "../formComponents/QstOptions";
+import axios from "axios";
 
 const DATA = [];
 const QptionDATA = [];
 //지나 부분
+
+function FormCreation() {
+  const [title, setTitle] = useState();
+  const [type, setType] = useState("체크박스");
+  const [countList, setCountList] = useState([0]);
+  const [qstTitle, setQstTitle] = useState();
+  const [qstArr, setQstArr] = useState(DATA);
+  const [input, setInput] = useState("");
+  const [options, setOptions] = useState([]);
+  const [qstImg, setQstImg] = useState("");
+  const [anonymous, setAnonymous] = useState(false);
+  const [essential, setEssential] = useState(false);
+  const [branch, setBranch] = useState(false);
+  const [branchCont, setBranchCont] = useState({});
+
+  const onChangeInput = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onQstTitleChange = (e) => {
+    setQstTitle(e.target.value);
+  };
+
+  const selectType = (e) => {
+    setType(e.target.value);
+  };
+
+  const addQst = (event) => {
+    event.preventDefault();
+    const newQst = {
+      qstId: "Q-" + nanoid(),
+      qstTitle: qstTitle,
+      qstType: type,
+      options: options,
+      qstImg: qstImg,
+      anonymous: anonymous,
+      essential: essential,
+      branch: branch,
+      branchCont: branchCont
+    };
+    setQstArr([...qstArr, newQst]);
+    setQstTitle("");
+    setOptions([]);
+    console.log([...qstArr, newQst]);
+  };
+
+  const postEnq = async() => {
+    axios.post("/api/postEnq", qstArr)
+      .then(response => {
+        console.log(response)
+      })
+    console.log(qstArr);
+  }
+
+  function deleteQst(id) {
+    const remainingTasks = qstArr.filter((task) => id !== task.id);
+    setQstArr(remainingTasks);
+  }
+
+  const QstList = qstArr.map((qst) => (
+    <FormQuestion
+      qstId={qst.qstId}
+      qstTitle={qst.qstTitle}
+      deleteTask={deleteQst}
+      qstType={qst.qstType}
+      options={qst.options}
+      qstImg={qst.qstImg}
+      anonymous={qst.anonymous}
+      essential={qst.essential}
+      branch={qst.branch}
+      branchCont={qst.branchCont}
+    />
+  ));
+  // const onAddDetailDiv = () => {
+  //   let countArr = [...countList];
+  //   let counter = countArr.slice(-1)[0];
+  //   counter += 1;
+  //   countArr.push(counter); // index 사용 X
+  //   // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
+  //   setCountList(countArr);
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  function AddOption(e) {
+    e.preventDefault();
+    console.log("Success!");
+    console.log(input);
+    if (!input || /^\s*$/.test(input)) {
+      return;
+    }
+
+    const newOptions = [...options, input];
+
+    setOptions(newOptions);
+    setInput("");
+  }
+
+  return (
+    <FormMain>
+      <FormSection>
+        <Header>
+          <HeaderHalf direction="left">
+            <Menu>{title}</Menu>
+          </HeaderHalf>
+          <HeaderHalf direction="right">
+            <button>배포</button>
+            <button onClick={postEnq}>저장</button>
+            <vutton>응답</vutton>
+          </HeaderHalf>
+        </Header>
+        <TitleInput>
+          <TitleField
+            type="text"
+            value={title}
+            placeholder="설문 제목을 입력하세요"
+            onChange={onChangeInput}
+          />
+        </TitleInput>
+
+        {QstList}
+
+        <MainFrame>
+          <QuestNum>질문</QuestNum>
+          <QuesTitle
+            type="text"
+            value={qstTitle}
+            placeholder="질문 제목을 입력하세요"
+            onChange={onQstTitleChange}
+          />
+          <TypeSelect>
+            <select onChange={selectType}>
+              <option id="checkBox">체크박스</option>
+              <option>객관식 질문</option>
+              <option>서술형 질문</option>
+            </select>
+          </TypeSelect>
+          <button onClick={addQst}>저장</button>
+
+          {type == "체크박스" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="checkbox" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
+
+          {type == "객관식 질문" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="radio" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
+
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
+
+          {type == "서술형 질문" && (
+            <SubjOption>
+              텍스트
+              <hr size="1" width="500px" color="gray" />
+            </SubjOption>
+          )}
+        </MainFrame>
+
+        {/* <StyledPlusIcon onClick={addTask()} /> */}
+      </FormSection>
+    </FormMain>
+  );
+}
+
+export default FormCreation;
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -164,188 +373,3 @@ const QuesTitle = styled.input`
   height: 2rem;
   margin: 1rem 1rem;
 `;
-
-function FormCreation() {
-  const [title, setTitle] = useState();
-  const [type, setType] = useState("체크박스");
-  const [countList, setCountList] = useState([0]);
-  const [qstTitle, setQstTitle] = useState();
-  const [qstArr, setQstArr] = useState(DATA);
-  const [input, setInput] = useState("");
-  const [options, setOptions] = useState([]);
-
-  const onChangeInput = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const onQstTitleChange = (e) => {
-    setQstTitle(e.target.value);
-  };
-
-  const selectType = (e) => {
-    setType(e.target.value);
-  };
-
-  const addQst = (event) => {
-    event.preventDefault();
-    const newQst = {
-      id: "Q-" + nanoid(),
-      title: qstTitle,
-      qstType: type,
-      options: options,
-    };
-    setQstArr([...qstArr, newQst]);
-    setQstTitle("");
-    setOptions([]);
-    console.log(qstArr);
-  };
-
-  function deleteQst(id) {
-    const remainingTasks = qstArr.filter((task) => id !== task.id);
-    setQstArr(remainingTasks);
-  }
-
-  const QstList = qstArr.map((qst) => (
-    <FormQuestion
-      id={qst.id}
-      title={qst.title}
-      deleteTask={deleteQst}
-      qstType={qst.qstType}
-      options={qst.options}
-    />
-  ));
-  // const onAddDetailDiv = () => {
-  //   let countArr = [...countList];
-  //   let counter = countArr.slice(-1)[0];
-  //   counter += 1;
-  //   countArr.push(counter); // index 사용 X
-  //   // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
-  //   setCountList(countArr);
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  function AddOption(e) {
-    e.preventDefault();
-    console.log("Success!");
-    console.log(input);
-    if (!input || /^\s*$/.test(input)) {
-      return;
-    }
-
-    const newOptions = [...options, input];
-
-    setOptions(newOptions);
-    setInput("");
-  }
-
-  return (
-    <FormMain>
-      <FormSection>
-        <Header>
-          <HeaderHalf direction="left">
-            <Menu>{title}</Menu>
-          </HeaderHalf>
-          <HeaderHalf direction="right">
-            <button>배포</button>
-            <button>저장</button>
-            <vutton>응답</vutton>
-          </HeaderHalf>
-        </Header>
-        <TitleInput>
-          <TitleField
-            type="text"
-            value={title}
-            placeholder="설문 제목을 입력하세요"
-            onChange={onChangeInput}
-          />
-        </TitleInput>
-
-        {QstList}
-
-        <MainFrame>
-          <QuestNum>질문</QuestNum>
-          <QuesTitle
-            type="text"
-            value={qstTitle}
-            placeholder="질문 제목을 입력하세요"
-            onChange={onQstTitleChange}
-          />
-          <TypeSelect>
-            <select onChange={selectType}>
-              <option id="checkBox">체크박스</option>
-              <option>객관식 질문</option>
-              <option>서술형 질문</option>
-            </select>
-          </TypeSelect>
-          <button onClick={addQst}>저장</button>
-
-          {type == "체크박스" && (
-            <div>
-              <OptList>
-                {options.map((it) => (
-                  <div>
-                    <input type="checkbox" value={it} /> <label>{it}</label>
-                  </div>
-                ))}
-              </OptList>
-              <OptionBox>
-                <br />
-                <br />
-                <input
-                  type="text"
-                  placeholder="옵션"
-                  value={input}
-                  name="text"
-                  onChange={handleChange}
-                />
-                <Btn>
-                  <button onClick={AddOption}>+</button>
-                </Btn>
-              </OptionBox>
-            </div>
-          )}
-
-          {type == "객관식 질문" && (
-            <div>
-              <OptList>
-                {options.map((it) => (
-                  <div>
-                    <input type="radio" value={it} /> <label>{it}</label>
-                  </div>
-                ))}
-              </OptList>
-
-              <OptionBox>
-                <br />
-                <br />
-                <input
-                  type="text"
-                  placeholder="옵션"
-                  value={input}
-                  name="text"
-                  onChange={handleChange}
-                />
-                <Btn>
-                  <button onClick={AddOption}>+</button>
-                </Btn>
-              </OptionBox>
-            </div>
-          )}
-
-          {type == "서술형 질문" && (
-            <SubjOption>
-              텍스트
-              <hr size="1" width="500px" color="gray" />
-            </SubjOption>
-          )}
-        </MainFrame>
-
-        {/* <StyledPlusIcon onClick={addTask()} /> */}
-      </FormSection>
-    </FormMain>
-  );
-}
-
-export default FormCreation;
