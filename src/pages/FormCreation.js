@@ -6,7 +6,11 @@ import { nanoid } from "nanoid";
 import QstOptions from "../formComponents/QstOptions";
 import axios from "axios";
 
-const DATA = [];
+const DATA = [
+  { qstId: "qweifef", qstTitle: "hello" },
+  { qstId: "qweifef", qstTitle: "hello" },
+  { qstId: "qweifef", qstTitle: "hello" },
+];
 const QptionDATA = [];
 //지나 부분
 
