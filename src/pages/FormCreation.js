@@ -6,11 +6,9 @@ import { nanoid } from "nanoid";
 import QstOptions from "../formComponents/QstOptions";
 import axios from "axios";
 
-const DATA = [
-  { qstTitle: "hello" },
-  { qstTitle: "hello" },
-  { qstTitle: "hello" },
-];
+const ALL = {};
+
+const DATA = [];
 const QptionDATA = [];
 //지나 부분
 
@@ -59,13 +57,24 @@ function FormCreation() {
     console.log([...qstArr, newQst]);
   };
 
-  const postEnq = async () => {
-    // qstArr 대신 JSON.stringify(qstArr) 사용?
-    axios.post("/api/postEnq", qstArr).then((response) => {
-      console.log(response);
-    });
-    console.log(qstArr);
-  };
+  const postEnq = async() => {
+    ALL.enqTitle = "enq title";
+    ALL.enqCont = qstArr;
+
+    axios.post("/api/postEnq", ALL)
+      .then(response => {
+        console.log(response)
+      })
+    console.log(JSON.stringify(ALL));
+  }
+
+  // const postEnq = async () => {
+  //   // qstArr 대신 JSON.stringify(qstArr) 사용?
+  //   axios.post("/api/postEnq", qstArr).then((response) => {
+  //     console.log(response);
+  //   });
+  //   console.log(qstArr);
+  // };
 
   function deleteQst(qstId) {
     const remainingTasks = qstArr.filter((task) => qstId !== task.qstId);
