@@ -56,6 +56,7 @@ function FormCreation() {
   };
 
   const postEnq = async () => {
+    // qstArr 대신 JSON.stringify(qstArr) 사용?
     axios.post("/api/postEnq", qstArr).then((response) => {
       console.log(response);
     });
