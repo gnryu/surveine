@@ -6,7 +6,48 @@ import { nanoid } from "nanoid";
 import QstOptions from "../formComponents/QstOptions";
 
 const DATA = [];
+const QptionDATA = [];
+//지나 부분
 
+const Wrapper = styled.div`
+  display: inline-block;
+  display: table-row;
+`;
+
+const OptionBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: 15px;
+  margin-bottom: 10px;
+`;
+
+const OptList = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-family: "NotoSans-Regular";
+  font-size: 14px;
+  line-height: 2px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+`;
+
+const Btn = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+`;
+
+const SubjOption = styled.div`
+  font-family: "NotoSans-Regular";
+  font-size: 12px;
+  color: #747474;
+  line-height: 1.5;
+  margin-left: 15px;
+`;
+
+// 도경 부분
 const FormMain = styled.div`
   background: grey;
   width: 100vw;
@@ -130,6 +171,8 @@ function FormCreation() {
   const [countList, setCountList] = useState([0]);
   const [qstTitle, setQstTitle] = useState();
   const [qstArr, setQstArr] = useState(DATA);
+  const [input, setInput] = useState("");
+  const [options, setOptions] = useState([]);
 
   const onChangeInput = (e) => {
     setTitle(e.target.value);
@@ -149,9 +192,11 @@ function FormCreation() {
       id: "Q-" + nanoid(),
       title: qstTitle,
       qstType: type,
+      options: options,
     };
     setQstArr([...qstArr, newQst]);
     setQstTitle("");
+    setOptions([]);
     console.log(qstArr);
   };
 
@@ -166,6 +211,7 @@ function FormCreation() {
       title={qst.title}
       deleteTask={deleteQst}
       qstType={qst.qstType}
+      options={qst.options}
     />
   ));
   // const onAddDetailDiv = () => {
@@ -175,6 +221,24 @@ function FormCreation() {
   //   countArr.push(counter); // index 사용 X
   //   // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
   //   setCountList(countArr);
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  function AddOption(e) {
+    e.preventDefault();
+    console.log("Success!");
+    console.log(input);
+    if (!input || /^\s*$/.test(input)) {
+      return;
+    }
+
+    const newOptions = [...options, input];
+
+    setOptions(newOptions);
+    setInput("");
+  }
 
   return (
     <FormMain>
@@ -200,7 +264,7 @@ function FormCreation() {
 
         {QstList}
 
-        <MainFrame onSubmit={addQst}>
+        <MainFrame>
           <QuestNum>질문</QuestNum>
           <QuesTitle
             type="text"
@@ -214,10 +278,36 @@ function FormCreation() {
               <option>객관식 질문</option>
               <option>서술형 질문</option>
             </select>
-            <QstOptions qstType={type} />
           </TypeSelect>
-          <button>저장</button>
+          <button onClick={addQst}>저장</button>
+
+          {type == "체크박스" && (
+            <div>
+              <OptList>
+                {options.map((it) => (
+                  <div>
+                    <input type="checkbox" value={it} /> <label>{it}</label>
+                  </div>
+                ))}
+              </OptList>
+              <OptionBox>
+                <br />
+                <br />
+                <input
+                  type="text"
+                  placeholder="옵션"
+                  value={input}
+                  name="text"
+                  onChange={handleChange}
+                />
+                <Btn>
+                  <button onClick={AddOption}>+</button>
+                </Btn>
+              </OptionBox>
+            </div>
+          )}
         </MainFrame>
+
         {/* <StyledPlusIcon onClick={addTask()} /> */}
       </FormSection>
     </FormMain>

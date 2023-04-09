@@ -141,6 +141,10 @@ function FormQuestion(props) {
       <MainFrame>
         <QstTitle>{props.title}</QstTitle>
         <QstOptions qstType={props.qstType} />
+        {props.options.map((it) => (
+          <div>{it}</div>
+        ))}
+
         <button
           type="button"
           className="btn btn__danger"
