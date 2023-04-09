@@ -174,7 +174,7 @@ function FormCreation() {
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
   const [fullForm, setFullForm] = useState();
-  const [formId, setFormId] = useState("Form" + nanoid());
+  const [formId, setFormId] = useState("Form-" + nanoid());
 
   const onChangeInput = (e) => {
     setTitle(e.target.value);
