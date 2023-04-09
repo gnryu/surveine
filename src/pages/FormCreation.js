@@ -116,9 +116,17 @@ function FormCreation() {
             <Menu>{title}</Menu>
           </HeaderHalf>
           <HeaderHalf direction="right">
-            <button>배포</button>
-            <button onClick={postEnq}>저장</button>
-            <vutton>응답</vutton>
+            <HeadBtn>
+              <QstBtn>
+                <button>배포</button>
+              </QstBtn>
+              <QstBtn>
+                <button onClick={postEnq}>저장</button>  
+              </QstBtn>
+              <QstBtn>
+                <button>응답</button>
+              </QstBtn>
+            </HeadBtn>
           </HeaderHalf>
         </Header>
         <TitleInput>
@@ -206,7 +214,7 @@ function FormCreation() {
           {type == "서술형 질문" && (
             <SubjOption>
               텍스트
-              <hr align="left" size="1" width="480px" color="gray" />
+              <hr align="left" size="1" width="570px" color="gray" />
             </SubjOption>
           )}
         </MainFrame>
@@ -371,16 +379,16 @@ const MainFrame = styled.form`
 
 const QuesTitle = styled.input`
   display: inline;
-  width: 30rem;
+  width: 35.5rem;
   height: 2rem;
   margin: 2rem 1rem 0.5rem 2rem;
 `;
 
-const AboutQst = styled.div`
+const HeadBtn = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const SaveBtn = styled.div`
+const QstBtn = styled.div`
   margin-left: 10px;
 `;
