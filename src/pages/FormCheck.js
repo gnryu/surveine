@@ -122,7 +122,11 @@ function FormCreation() {
 
   return (
     <FormMain>
-      <FormSection>{serverData.enqId}</FormSection>
+      <FormSection>
+        {serverData.enqId}<br/>
+        <h1>Test</h1>
+        {serverData.enqCont[0].qstId}
+      </FormSection>
     </FormMain>
   );
 }

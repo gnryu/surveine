@@ -150,9 +150,9 @@ function CoffeBeenList(ref) {
       </Header>
 
       <FormList>
-        <Link to="/check">
-          <CoffeeBean />
-        </Link>
+        <CoffeeBean />
+        <CoffeeBean />
+        <CoffeeBean />
         <Link to="/about">
           <PlusDiv>
             <StyledPlusIcon />
