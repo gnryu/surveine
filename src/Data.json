@@ -1,0 +1,18 @@
+{
+  "enqId": "asdfasdfasdfasdf",
+  "enqTitle": "enq title",
+  "enqCont": [
+    {
+      "qstId": "Q-QqJ1HDVAtW9ycgbrfgkm9",
+      "qstType": "체크박스",
+      "qstTitle": "ㅇㅇ",
+      "qstImg": "",
+      "anonymous": false,
+      "essential": false,
+      "branch": false,
+      "branchCont": {},
+      "options": ["ㅇㅇ", "ㅇ"]
+    }
+  ],
+  "_class": "com.kafeine.surveine.domain.Enq"
+}
