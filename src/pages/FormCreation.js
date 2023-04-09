@@ -140,6 +140,7 @@ function FormCreation() {
             placeholder="질문 제목을 입력하세요"
             onChange={onQstTitleChange}
           />
+
           <TypeSelect>
             <select onChange={selectType}>
               <option id="checkBox">체크박스</option>
@@ -148,7 +149,7 @@ function FormCreation() {
             </select>
           </TypeSelect>
           <button onClick={addQst}>저장</button>
-
+          
           {type == "체크박스" && (
             <div>
               <OptList>
@@ -205,7 +206,7 @@ function FormCreation() {
           {type == "서술형 질문" && (
             <SubjOption>
               텍스트
-              <hr size="1" width="500px" color="gray" />
+              <hr align="left" size="1" width="480px" color="gray" />
             </SubjOption>
           )}
         </MainFrame>
@@ -228,8 +229,7 @@ const OptionBox = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   width: 80%;
-  margin-left: 15px;
-  margin-bottom: 10px;
+  margin: 1rem 2rem 2rem;
 `;
 
 const OptList = styled.div`
@@ -238,14 +238,14 @@ const OptList = styled.div`
   font-family: "NotoSans-Regular";
   font-size: 14px;
   line-height: 2px;
-  margin-left: 10px;
-  margin-bottom: 15px;
+  margin: 1rem 2rem;
 `;
 
 const Btn = styled.div`
   width: 20px;
   height: 20px;
   margin-left: 10px;
+  margin-top: 7px;
 `;
 
 const SubjOption = styled.div`
@@ -253,7 +253,8 @@ const SubjOption = styled.div`
   font-size: 12px;
   color: #747474;
   line-height: 1.5;
-  margin-left: 15px;
+  margin-top: 25px;
+  margin-left: 35px;
 `;
 
 // 도경 부분
@@ -350,13 +351,14 @@ const QuestNum = styled.div`
 `;
 const TypeSelect = styled.div`
   display: inline-block;
+  margin-right: 15px;
 `;
 
 const MainFrame = styled.form`
   display: block;
   margin: auto;
   width: 50rem;
-  height: 15rem;
+  height: 11rem;
   background: #f8f8f8;
   border: 1px solid #21296b;
   border-radius: 20px;
@@ -371,5 +373,14 @@ const QuesTitle = styled.input`
   display: inline;
   width: 30rem;
   height: 2rem;
-  margin: 1rem 1rem;
+  margin: 2rem 1rem 0.5rem 2rem;
+`;
+
+const AboutQst = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const SaveBtn = styled.div`
+  margin-left: 10px;
 `;
