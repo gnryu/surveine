@@ -7,9 +7,9 @@ import QstOptions from "../formComponents/QstOptions";
 import axios from "axios";
 
 const DATA = [
-  { qstId: "qweifef", qstTitle: "hello" },
-  { qstId: "qweifef", qstTitle: "hello" },
-  { qstId: "qweifef", qstTitle: "hello" },
+  { qstTitle: "hello" },
+  { qstTitle: "hello" },
+  { qstTitle: "hello" },
 ];
 const QptionDATA = [];
 //지나 부분
