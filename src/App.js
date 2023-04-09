@@ -6,7 +6,7 @@ import Navi from './TopBar/Navi';
 function App() {
   return (
     <BrowserRouter>
-    <Workspace/>
+    <Workspace/> 
     </BrowserRouter>
   );
 }

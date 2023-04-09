@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navi.css";
+import "./Nav.css";
 import {GrLanguage} from 'react-icons/gr';
 
 
-function Navi(){
+function Nav(){
     return(        
         <div className="navbar"> 
+        
             <img src= '/img/logo.svg'  alt="logo"/>
             {/* 사이트로고 */}
             <div>
@@ -16,10 +17,10 @@ function Navi(){
             <div className="buttons">
                 <button><GrLanguage/></button> 
                 {/* 번역 아이콘 */}
-                <button>Login</button>
+                <button>Logout</button>
             </div>
         </div>
     );
 }
 
-export default Navi;
+export default Nav;

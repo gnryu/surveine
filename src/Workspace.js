@@ -1,15 +1,18 @@
-import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import SideNavi from './SideBar/SideNavi';
+import Navi from './TopBar/Navi';
+import Nav from './TopBar/Nav';
 
 
 function Workspace() {
   return (
-    <div>
-       <div className='container'>
-        <SideNavi/>
-       </div>
-    </div>
+   <div className='container'>
+    <Nav/>
+    {/* 탑 네비게이션바 */}
+    <SideNavi/>
+    {/* 사이드 네이게이션바 */}
+   </div>
+  
   );
 }
 

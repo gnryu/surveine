@@ -1,8 +1,4 @@
-.container {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 20%;
-  background-color: #111536;
+.container { /*top navigation과 sidebar 합치기*/
+  display: flex;
+  flex-direction: column;
 }

@@ -1,27 +1,25 @@
-.container {
+.sidebar { /*sidebar 컨테이너*/
+    position: fixed;
+    left: 0;
+    top: 60px; 
+    bottom: 0;
+    width: 250px;
+    background-color: #111536;
+    color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   
-.navbar{
-flex-direction: column;
-align-items: center;
-width: 250px;
-height: 100vh;
-background-color: #111536;
-}
-
-.top-nav {
-    display: flex;
-    flex: 1;
-    background-color: #e93636;
-  }
-
-.navbar hr{
+.sidebar hr{ /*sidebar 가로 구분 줄*/
     color:white;
     size: 3px;
     width: 100%;
-    
+}
+
+.me-auto{ /*드롭다운 메뉴*/
+    padding: 10px 20px;
+    line-height: 2rem;
+    position: relative;
 }
 
 .profile {

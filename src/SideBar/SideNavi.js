@@ -1,26 +1,25 @@
-import React, {useState} from "react";
+import React from "react";
 import './SideNavi.css';
 import {Nav, Navbar, NavDropdown, Container} from'react-bootstrap';
 import {FiSettings} from 'react-icons/fi';
-import {CgProfile} from 'react-icons/cg';
 
 function SideNavi(){
 
 return(
-  <div className="container">
-     <div className="navbar">
+     <div className="sidebar">
       <div>
-      <img src= "/img/logo.svg"  alt="logo"/>
-      </div>
-      <div>
-        <FiSettings classnName="icon" color="grey" />
+        <FiSettings classnName="icon" color="grey" /> 
+        {/* 환경설정 아이콘 */}
       </div>
       <img src="/img/profile.svg" alt="profile"/>
+      {/* 프로필 아이콘 */}
       <div className="name"> Kaffeine</div>
       <hr/>
       <Navbar.Collapse id="responsive-navbar-nav">
+        {/* 설문조사 함들 */}
         <Nav className="me-auto">
           <Nav.Link href="/gps설문함">GPS 설문함</Nav.Link>
+          {/* 드롭다운 메뉴 */}
           <NavDropdown 
           title="제작함" 
           id="produce-dropdown">
@@ -35,7 +34,6 @@ return(
           </NavDropdown>
         </Nav>  
       </Navbar.Collapse>
-      </div>
       </div>
   );
 }
