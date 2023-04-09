@@ -173,7 +173,7 @@ function FormCreation() {
   const [qstArr, setQstArr] = useState(DATA);
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
-  const [fullForm, setFullForm] = useState();
+  const [fullForm, setFullForm] = useState({ id: 2, title: "", qustions: [] });
   const [formId, setFormId] = useState("Form-" + nanoid());
 
   const onChangeInput = (e) => {
@@ -249,12 +249,15 @@ function FormCreation() {
       qustions: [...qstArr],
     };
     setFullForm(newForm);
+  }
+
+  function saveButton() {
+    saveForm();
+    saveForm();
     console.log(fullForm);
   }
   return (
     <FormMain>
-      {" "}
-      {saveForm}
       <FormSection>
         <Header>
           <HeaderHalf direction="left">
@@ -262,7 +265,7 @@ function FormCreation() {
           </HeaderHalf>
           <HeaderHalf direction="right">
             <button>배포</button>
-            <button onClick={saveForm}>저장</button>
+            <button onClick={saveButton}>저장</button>
             <vutton>응답</vutton>
           </HeaderHalf>
         </Header>
