@@ -246,7 +246,7 @@ function FormCreation() {
     const newForm = {
       id: formId,
       title: title,
-      qustions: qstArr,
+      qustions: [...qstArr],
     };
     setFullForm(newForm);
     console.log(fullForm);
