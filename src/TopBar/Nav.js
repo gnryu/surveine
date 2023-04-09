@@ -8,6 +8,7 @@ function Nav(){
     return(        
         <div className="navbar"> 
         <div className="icon">
+            {/* 로고쪽 색상 변경 */}
             <img className="logo" src= '/img/logo.svg'  alt="logo"/>
             {/* 사이트로고 */}
             </div>
