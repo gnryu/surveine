@@ -97,37 +97,36 @@ function FormQuestion(props) {
     <>
       <MainFrame>
         <QstFrame>
-          <QstTitle>{props.qstTitle}</QstTitle>  
+          <QstTitle>{props.qstTitle}</QstTitle>
           <DelBtn>
             <button
               type="button"
               className="btn btn__danger"
-              onClick={() => props.deleteTask(props.id)}
-              >
+              onClick={() => props.deleteTask(props.qstId)}
+            >
               {" "}
               Delete{" "}
             </button>
           </DelBtn>
         </QstFrame>
-        
+
         <OptFrame>
           <QstOptions qstType={props.qstType} />
-          {props.qstType == "체크박스" && (
+          {props.qstType == "체크박스" &&
             props.options.map((it) => (
               <OptBox>
-                <input type="checkbox" value={it} /><label>{it}</label>
+                <input type="checkbox" value={it} />
+                <label>{it}</label>
               </OptBox>
-            ))
-          )}
-          {props.qstType == "객관식 질문" && (
+            ))}
+          {props.qstType == "객관식 질문" &&
             props.options.map((it) => (
               <OptBox>
-                <input type="radio" value={it} /><label>{it}</label>
+                <input type="radio" value={it} />
+                <label>{it}</label>
               </OptBox>
-            ))
-          )}
+            ))}
         </OptFrame>
-        
       </MainFrame>
     </>
   );

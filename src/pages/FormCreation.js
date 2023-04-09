@@ -47,7 +47,7 @@ function FormCreation() {
       anonymous: anonymous,
       essential: essential,
       branch: branch,
-      branchCont: branchCont
+      branchCont: branchCont,
     };
     setQstArr([...qstArr, newQst]);
     setQstTitle("");
@@ -55,16 +55,15 @@ function FormCreation() {
     console.log([...qstArr, newQst]);
   };
 
-  const postEnq = async() => {
-    axios.post("/api/postEnq", qstArr)
-      .then(response => {
-        console.log(response)
-      })
+  const postEnq = async () => {
+    axios.post("/api/postEnq", qstArr).then((response) => {
+      console.log(response);
+    });
     console.log(qstArr);
-  }
+  };
 
   function deleteQst(id) {
-    const remainingTasks = qstArr.filter((task) => id !== task.id);
+    const remainingTasks = qstArr.filter((task) => id !== task.qstId);
     setQstArr(remainingTasks);
   }
 
@@ -121,7 +120,7 @@ function FormCreation() {
                 <button>배포</button>
               </QstBtn>
               <QstBtn>
-                <button onClick={postEnq}>저장</button>  
+                <button onClick={postEnq}>저장</button>
               </QstBtn>
               <QstBtn>
                 <button>응답</button>
@@ -157,7 +156,7 @@ function FormCreation() {
             </select>
           </TypeSelect>
           <button onClick={addQst}>저장</button>
-          
+
           {type == "체크박스" && (
             <div>
               <OptList>
