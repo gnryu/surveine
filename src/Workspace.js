@@ -1,6 +1,5 @@
 import './App.css';
 import SideNavi from './SideBar/SideNavi';
-import Navi from './TopBar/Navi';
 import Nav from './TopBar/Nav';
 
 
