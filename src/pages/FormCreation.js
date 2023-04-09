@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormQuestion from "../formComponents/FormQuestion";
 import { ReactComponent as PlusIcon } from "../img/PlusIcon.svg";
 import styled from "styled-components";
+import { nanoid } from "nanoid";
+import QstOptions from "../formComponents/QstOptions";
+
+const DATA = [];
 
 const FormMain = styled.div`
   background: grey;
@@ -81,23 +85,96 @@ const TitleField = styled.input`
   font-size: 1rem;
   border-radius: 1rem;
 `;
+
+const QuestNum = styled.div`
+  width: 5rem;
+  height: 2rem;
+  margin-top: -1rem;
+  margin-left: -0.2rem;
+  border-radius: 0.5rem;
+  background: #1a2051;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+`;
+const TypeSelect = styled.div`
+  display: inline-block;
+`;
+
+const MainFrame = styled.form`
+  display: block;
+  margin: auto;
+  width: 50rem;
+  height: 15rem;
+  background: #f8f8f8;
+  border: 1px solid #21296b;
+  border-radius: 20px;
+  margin-bottom: 3em;
+  display: table;
+  &:hover {
+    border: 2px solid #1a2051;
+  }
+`;
+
+const QuesTitle = styled.input`
+  display: inline;
+  width: 30rem;
+  height: 2rem;
+  margin: 1rem 1rem;
+`;
+
 function FormCreation() {
   const [title, setTitle] = useState();
-  const [type, setType] = useState();
+  const [type, setType] = useState("체크박스");
   const [countList, setCountList] = useState([0]);
+  const [qstTitle, setQstTitle] = useState();
+  const [qstArr, setQstArr] = useState(DATA);
 
   const onChangeInput = (e) => {
     setTitle(e.target.value);
   };
 
-  const onAddDetailDiv = () => {
-    let countArr = [...countList];
-    let counter = countArr.slice(-1)[0];
-    counter += 1;
-    countArr.push(counter); // index 사용 X
-    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
-    setCountList(countArr);
+  const onQstTitleChange = (e) => {
+    setQstTitle(e.target.value);
   };
+
+  const selectType = (e) => {
+    setType(e.target.value);
+  };
+
+  const addQst = (event) => {
+    event.preventDefault();
+    const newQst = {
+      id: "Q-" + nanoid(),
+      title: qstTitle,
+      qstType: type,
+    };
+    setQstArr([...qstArr, newQst]);
+    setQstTitle("");
+    console.log(qstArr);
+  };
+
+  function deleteQst(id) {
+    const remainingTasks = qstArr.filter((task) => id !== task.id);
+    setQstArr(remainingTasks);
+  }
+
+  const QstList = qstArr.map((qst) => (
+    <FormQuestion
+      id={qst.id}
+      title={qst.title}
+      deleteTask={deleteQst}
+      qstType={qst.qstType}
+    />
+  ));
+  // const onAddDetailDiv = () => {
+  //   let countArr = [...countList];
+  //   let counter = countArr.slice(-1)[0];
+  //   counter += 1;
+  //   countArr.push(counter); // index 사용 X
+  //   // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
+  //   setCountList(countArr);
 
   return (
     <FormMain>
@@ -120,10 +197,28 @@ function FormCreation() {
             onChange={onChangeInput}
           />
         </TitleInput>
-        <FormQuestion countList={countList} />
-        <PlusDiv>
-          <StyledPlusIcon onClick={onAddDetailDiv} />
-        </PlusDiv>
+
+        {QstList}
+
+        <MainFrame onSubmit={addQst}>
+          <QuestNum>질문</QuestNum>
+          <QuesTitle
+            type="text"
+            value={qstTitle}
+            placeholder="질문 제목을 입력하세요"
+            onChange={onQstTitleChange}
+          />
+          <TypeSelect>
+            <select onChange={selectType}>
+              <option id="checkBox">체크박스</option>
+              <option>객관식 질문</option>
+              <option>서술형 질문</option>
+            </select>
+            <QstOptions qstType={type} />
+          </TypeSelect>
+          <button>저장</button>
+        </MainFrame>
+        {/* <StyledPlusIcon onClick={addTask()} /> */}
       </FormSection>
     </FormMain>
   );

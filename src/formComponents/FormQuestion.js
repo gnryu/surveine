@@ -64,6 +64,14 @@ const QuesTitle = styled.input`
   margin: 1rem 1rem;
 `;
 
+const QstTitle = styled.div`
+  display: inline-block;
+  width: 30rem;
+  margin: 1rem 1rem;
+`;
+
+//함수
+
 function FormQuestion(props) {
   const [title, setTitle] = useState();
   const [id, setId] = useState(0);
@@ -123,52 +131,25 @@ function FormQuestion(props) {
     setId(currentId);
   };
 
-  const SaveToArray = (e) => {
-    let count = 0;
-    qstBox.map((data) => {
-      if (data.qst.qstId == id) {
-        qstBox[id] = qstInfo;
-        count++;
-        console.log(JSON.parse(JSON.stringify([...qstBox])));
-        return;
-      }
-    });
-    if (count == 0) {
-      newQstBox([...qstBox, qstInfo]);
-      console.log(JSON.parse(JSON.stringify([...qstBox, qstInfo])));
-      if (id == 0) {
-        newQstBox([qstInfo]);
-        console.log(JSON.parse(JSON.stringify(qstInfo)));
-      }
-    }
+  const SaveToArray = (idreal) => {
+    console.log(idreal);
   };
   //
 
   return (
     <>
-      {props.countList &&
-        props.countList.map((item, i) => (
-          <>
-            <MainFrame
-              onClick={(e) => {
-                IdChange(item);
-              }}
-            >
-              <QuestNum>질문</QuestNum>
-              <QuesTitle
-                type="text"
-                value={qstInfo.qstTitle}
-                placeholder="질문 제목을 입력하세요"
-                onChange={(e) => {
-                  handleClick({ qstTitle: e.target.value, qstId: item });
-                }}
-              />
-
-              <button onClick={SaveToArray}>저장</button>
-              <QstOptions />
-            </MainFrame>
-          </>
-        ))}
+      <MainFrame>
+        <QstTitle>{props.title}</QstTitle>
+        <QstOptions qstType={props.qstType} />
+        <button
+          type="button"
+          className="btn btn__danger"
+          onClick={() => props.deleteTask(props.id)}
+        >
+          {" "}
+          Delete{" "}
+        </button>
+      </MainFrame>
     </>
   );
 }

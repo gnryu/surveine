@@ -27,9 +27,6 @@ function QstOptions({ qstType }) {
   // const opt = "옵션1"
 
   //타입 설렉트
-  const selectType = (e) => {
-    setType(e.target.value);
-  };
 
   useEffect(() => {
     console.log(type);
@@ -37,16 +34,9 @@ function QstOptions({ qstType }) {
 
   return (
     <>
-      <TypeSelect>
-        <select onChange={selectType}>
-          <option>체크박스</option>
-          <option>객관식 질문</option>
-          <option>서술형 질문</option>
-        </select>
-      </TypeSelect>
       <Wrapper>
         <div>
-          {type == "체크박스" && (
+          {qstType == "체크박스" && (
             <div>
               <OptList>
                 {options.map((it) => (
@@ -72,7 +62,7 @@ function QstOptions({ qstType }) {
             </div>
           )}
 
-          {type == "객관식 질문" && (
+          {qstType == "객관식 질문" && (
             <div>
               <OptList>
                 {options.map((it) => (
@@ -99,7 +89,7 @@ function QstOptions({ qstType }) {
             </div>
           )}
 
-          {type == "서술형 질문" && (
+          {qstType == "서술형 질문" && (
             <SubjOption>
               텍스트
               <hr size="1" width="500px" color="gray" />
