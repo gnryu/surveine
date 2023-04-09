@@ -8,7 +8,7 @@ import QstOptions from "../formComponents/QstOptions";
 const DATA = [];
 const QptionDATA = [];
 //지나 부분
-
+let newQst = {};
 const Wrapper = styled.div`
   display: inline-block;
   display: table-row;
@@ -173,6 +173,8 @@ function FormCreation() {
   const [qstArr, setQstArr] = useState(DATA);
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
+  const [fullForm, setFullForm] = useState();
+  const [formId, setFormId] = useState("Form" + nanoid());
 
   const onChangeInput = (e) => {
     setTitle(e.target.value);
@@ -188,7 +190,7 @@ function FormCreation() {
 
   const addQst = (event) => {
     event.preventDefault();
-    const newQst = {
+    newQst = {
       id: "Q-" + nanoid(),
       title: qstTitle,
       qstType: type,
@@ -240,6 +242,15 @@ function FormCreation() {
     setInput("");
   }
 
+  function saveForm() {
+    const newForm = {
+      id: formId,
+      title: title,
+      qustions: qstArr,
+    };
+    setFullForm(newForm);
+    console.log(fullForm);
+  }
   return (
     <FormMain>
       <FormSection>
@@ -249,7 +260,7 @@ function FormCreation() {
           </HeaderHalf>
           <HeaderHalf direction="right">
             <button>배포</button>
-            <button>저장</button>
+            <button onClick={saveForm}>저장</button>
             <vutton>응답</vutton>
           </HeaderHalf>
         </Header>
