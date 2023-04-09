@@ -27,6 +27,7 @@ function FormCreation() {
   const [essential, setEssential] = useState(false);
   const [branch, setBranch] = useState(false);
   const [branchCont, setBranchCont] = useState({});
+  const [form, setForm] = useState();
 
   const onChangeInput = (e) => {
     setTitle(e.target.value);
@@ -60,11 +61,16 @@ function FormCreation() {
   };
 
   const postEnq = async () => {
+    const newForm = {
+      qustions: qstArr,
+      formTitle: title,
+    };
+
     // qstArr 대신 JSON.stringify(qstArr) 사용?
-    axios.post("/api/postEnq", qstArr).then((response) => {
+    axios.post("/api/postEnq", newForm).then((response) => {
       console.log(response);
     });
-    console.log(qstArr);
+    console.log(newForm);
   };
 
   function deleteQst(qstId) {
