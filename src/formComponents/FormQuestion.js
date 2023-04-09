@@ -102,8 +102,8 @@ function FormQuestion(props) {
             <button
               type="button"
               className="btn btn__danger"
-              onClick={() => props.deleteTask(props.id)}
-              >
+              onClick={() => props.deleteTask(props.qstId)}
+            >
               {" "}
               Delete{" "}
             </button>

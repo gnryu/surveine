@@ -63,8 +63,8 @@ function FormCreation() {
     console.log(qstArr);
   }
 
-  function deleteQst(id) {
-    const remainingTasks = qstArr.filter((task) => id !== task.id);
+  function deleteQst(qstId) {
+    const remainingTasks = qstArr.filter((task) => qstId !== task.qstId);
     setQstArr(remainingTasks);
   }
 
