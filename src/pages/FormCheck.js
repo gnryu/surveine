@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { nanoid } from "nanoid";
 import QstOptions from "../formComponents/QstOptions";
 import axios from "axios";
-
+import serverData from "../Data.json";
 const ALL = {};
 
 const DATA = [];
@@ -57,16 +57,15 @@ function FormCreation() {
     console.log([...qstArr, newQst]);
   };
 
-  const postEnq = async() => {
+  const postEnq = async () => {
     ALL.enqTitle = "enq title";
     ALL.enqCont = qstArr;
 
-    axios.post("/api/postEnq", ALL)
-      .then(response => {
-        console.log(response)
-      })
+    axios.post("/api/postEnq", ALL).then((response) => {
+      console.log(response);
+    });
     console.log(JSON.stringify(ALL));
-  }
+  };
 
   // const postEnq = async () => {
   //   // qstArr 대신 JSON.stringify(qstArr) 사용?
@@ -123,117 +122,7 @@ function FormCreation() {
 
   return (
     <FormMain>
-      <FormSection>
-        <Header>
-          <HeaderHalf direction="left">
-            <Menu>{title}</Menu>
-          </HeaderHalf>
-          <HeaderHalf direction="right">
-            <HeadBtn>
-              <QstBtn>
-                <button>배포</button>
-              </QstBtn>
-              <QstBtn>
-                <button onClick={postEnq}>저장</button>
-              </QstBtn>
-              <QstBtn>
-                <button>응답</button>
-              </QstBtn>
-            </HeadBtn>
-          </HeaderHalf>
-        </Header>
-        <TitleInput>
-          <TitleField
-            type="text"
-            value={title}
-            placeholder="설문 제목을 입력하세요"
-            onChange={onChangeInput}
-          />
-        </TitleInput>
-
-        {QstList}
-
-        <MainFrame>
-          <QuestNum>질문</QuestNum>
-          <QuesTitle
-            type="text"
-            value={qstTitle}
-            placeholder="질문 제목을 입력하세요"
-            onChange={onQstTitleChange}
-          />
-
-          <TypeSelect>
-            <select onChange={selectType}>
-              <option id="checkBox">체크박스</option>
-              <option>객관식 질문</option>
-              <option>서술형 질문</option>
-            </select>
-          </TypeSelect>
-          <button onClick={addQst}>저장</button>
-
-          {type == "체크박스" && (
-            <div>
-              <OptList>
-                {options.map((it) => (
-                  <div>
-                    <input type="checkbox" value={it} /> <label>{it}</label>
-                  </div>
-                ))}
-              </OptList>
-              <OptionBox>
-                <br />
-                <br />
-                <input
-                  type="text"
-                  placeholder="옵션"
-                  value={input}
-                  name="text"
-                  onChange={handleChange}
-                />
-                <Btn>
-                  <button onClick={AddOption}>+</button>
-                </Btn>
-              </OptionBox>
-            </div>
-          )}
-
-          {type == "객관식 질문" && (
-            <div>
-              <OptList>
-                {options.map((it) => (
-                  <div>
-                    <input type="radio" value={it} /> <label>{it}</label>
-                  </div>
-                ))}
-              </OptList>
-
-              <OptionBox>
-                <br />
-                <br />
-                <input
-                  type="text"
-                  placeholder="옵션"
-                  value={input}
-                  name="text"
-                  onChange={handleChange}
-                />
-                <Btn>
-                  <button onClick={AddOption}>+</button>
-                </Btn>
-              </OptionBox>
-            </div>
-          )}
-
-          {type == "서술형 질문" && (
-            <SubjOption>
-              텍스트
-              <hr align="left" size="1" width="570px" color="gray" />
-            </SubjOption>
-          )}
-        </MainFrame>
-
-        {/* <StyledPlusIcon onClick={addTask()} /> */}
-      </FormSection>
+      <FormSection>{serverData.enqId}</FormSection>
     </FormMain>
   );
 }
